@@ -127,7 +127,6 @@ const UsersList = ({ neighbors }) => {
               <div className="relative flex-grow group">
                 <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-xl blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <div className="relative">
-                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 group-hover:text-primary transition-colors duration-200 z-10" size={20} />
                   <input
                     type="text"
                     placeholder="✨ Search by name, GitHub, Slack, or airport..."
@@ -373,7 +372,7 @@ const UsersList = ({ neighbors }) => {
                 </div>
                 
                 <div className="flex items-center gap-3">
-                  <div className="status-summary-badge success">
+                  <div className="status-summary-badge success" style={{marginRight: '10px'}}>
                     <div className="status-dot success"></div>
                     <span className="font-medium">{eligibleCount}</span>
                     <span className="text-xs opacity-90">eligible</span>
