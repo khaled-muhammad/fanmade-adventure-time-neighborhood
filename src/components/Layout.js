@@ -1,35 +1,59 @@
 import React, { useState } from 'react';
-import { LayoutGrid, Users, RefreshCw, Menu, X, Clock, MapPin, Award, BellRing, Heart, Sparkles } from 'lucide-react';
+import { LayoutGrid, Users, RefreshCw, Menu, X, Clock, MapPin, Award, BellRing, Heart, Sparkles, Home } from 'lucide-react';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 
-const Layout = ({ children, activeTab, setActiveTab, onRefresh }) => {
+const Layout = ({ children, activeTab, onRefresh, onNavigate }) => {
+  const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
   
   const tabs = [
-    { id: 'dashboard', label: 'Dashboard', icon: <LayoutGrid size={18} /> },
-    { id: 'participants', label: 'Participants', icon: <Users size={18} /> },
+    { id: 'home', label: 'Home', icon: <Home size={18} />, path: '/' },
+    { id: 'dashboard', label: 'Dashboard', icon: <LayoutGrid size={18} />, path: '/dashboard' },
+    { id: 'participants', label: 'Participants', icon: <Users size={18} />, path: '/participants' },
   ];
+  
+  // Determine active tab from router path
+  const getCurrentActiveTab = () => {
+    const path = router.pathname;
+    if (path === '/') return 'home';
+    if (path === '/dashboard') return 'dashboard';
+    if (path === '/participants') return 'participants';
+    return activeTab || 'home';
+  };
+  
+  const currentActiveTab = getCurrentActiveTab();
   
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
   
   const handleRefresh = async () => {
+    if (!onRefresh) return;
     setIsRefreshing(true);
     await onRefresh();
     setIsRefreshing(false);
+  };
+
+  const handleNavigation = (tab) => {
+    // Close mobile menu
+    setMenuOpen(false);
+    
+    // Navigate using Next.js router
+    router.push(tab.path);
   };
   
   return (
     <div className="min-h-screen flex flex-col">
       <header className="navbar">
         <div className="container flex items-center justify-between">
-          <div className="navbar-brand">
+          <Link href="/" className="navbar-brand">
             <div className="navbar-brand-icon">
               <Image src="https://neighborhood.hackclub.dev/neighborhoodLogo.png" alt="Neighborhood" width={128} height={128} />
             </div>
-          </div>
+          </Link>
           
           {/* Mobile menu button - only visible on small screens */}
           <button 
@@ -53,23 +77,25 @@ const Layout = ({ children, activeTab, setActiveTab, onRefresh }) => {
             {tabs.map(tab => (
               <button
                 key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`nav-link ${activeTab === tab.id ? 'active' : ''}`}
+                onClick={() => handleNavigation(tab)}
+                className={`nav-link ${currentActiveTab === tab.id ? 'active' : ''}`}
               >
                 {tab.icon}
                 <span>{tab.label}</span>
               </button>
             ))}
             
-            <button 
-              onClick={handleRefresh}
-              disabled={isRefreshing}
-              className="button-outline"
-              style={{marginLeft: '0.5rem'}}
-            >
-              <RefreshCw size={16} className={isRefreshing ? 'animate-spin' : ''} />
-              <span>{isRefreshing ? 'Refreshing...' : 'Refresh Data'}</span>
-            </button>
+            {onRefresh && (
+              <button 
+                onClick={handleRefresh}
+                disabled={isRefreshing}
+                className="button-outline"
+                style={{marginLeft: '0.5rem'}}
+              >
+                <RefreshCw size={16} className={isRefreshing ? 'animate-spin' : ''} />
+                <span>{isRefreshing ? 'Refreshing...' : 'Refresh Data'}</span>
+              </button>
+            )}
           </nav>
         </div>
       </header>
@@ -87,26 +113,25 @@ const Layout = ({ children, activeTab, setActiveTab, onRefresh }) => {
             {tabs.map(tab => (
               <button
                 key={tab.id}
-                onClick={() => {
-                  setActiveTab(tab.id);
-                  setMenuOpen(false);
-                }}
-                className={`nav-link ${activeTab === tab.id ? 'active' : ''}`}
+                onClick={() => handleNavigation(tab)}
+                className={`nav-link ${currentActiveTab === tab.id ? 'active' : ''}`}
               >
                 {tab.icon}
                 <span>{tab.label}</span>
               </button>
             ))}
             
-            <button
-              onClick={handleRefresh}
-              disabled={isRefreshing} 
-              className="button-outline"
-              style={{marginTop: '0.5rem'}}
-            >
-              <RefreshCw size={16} className={isRefreshing ? 'animate-spin' : ''} />
-              <span>{isRefreshing ? 'Refreshing...' : 'Refresh Data'}</span>
-            </button>
+            {onRefresh && (
+              <button
+                onClick={handleRefresh}
+                disabled={isRefreshing} 
+                className="button-outline"
+                style={{marginTop: '0.5rem'}}
+              >
+                <RefreshCw size={16} className={isRefreshing ? 'animate-spin' : ''} />
+                <span>{isRefreshing ? 'Refreshing...' : 'Refresh Data'}</span>
+              </button>
+            )}
           </nav>
         </div>
       )}

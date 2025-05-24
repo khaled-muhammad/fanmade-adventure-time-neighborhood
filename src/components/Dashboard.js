@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import { Pie, Bar, Doughnut } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -22,7 +23,9 @@ ChartJS.register(
   Title
 );
 
-const Dashboard = ({ neighbors, setActiveTab }) => {
+const Dashboard = ({ neighbors }) => {
+  const router = useRouter();
+  
   // Calculate statistics
   const totalParticipants = neighbors.length;
   
@@ -163,12 +166,20 @@ const Dashboard = ({ neighbors, setActiveTab }) => {
     },
     maintainAspectRatio: false,
   };
+
+  const handleViewParticipants = () => {
+    router.push('/participants');
+  };
   
   return (
     <div className="space-y-8">
       <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold">Neighborhood Dashboard</h2>
-        <div className="badge badge-primary flex items-center gap-1">
+        <h2 className="text-3xl font-bold text-gray-900 animate-bounce">
+          <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+            Adventure Dashboard!
+          </span>
+        </h2>
+        <div className="badge badge-primary flex items-center gap-1 animate-pulse">
           <Calendar size={14} />
           <span>Last Updated: Today</span>
         </div>
@@ -176,47 +187,47 @@ const Dashboard = ({ neighbors, setActiveTab }) => {
       
       {/* Stats Section */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div className="card stat-card">
+        <div className="card stat-card hover:scale-105 transition-transform">
           <div className="stat-icon stat-primary">
             <Users size={24} strokeWidth={2} />
           </div>
           <div className="stat-value">{totalParticipants}</div>
-          <div className="stat-label">Total Participants</div>
+          <div className="stat-label">Adventure Party</div>
           <div className="stat-indicator">
             <div className="stat-indicator-bar" style={{ width: '100%' }}></div>
           </div>
         </div>
         
-        <div className="card stat-card">
+        <div className="card stat-card hover:scale-105 transition-transform cursor-pointer" onClick={handleViewParticipants}>
           <div className="stat-icon stat-success">
             <Award size={24} strokeWidth={2} />
           </div>
           <div className="stat-value">{eligibleParticipants}</div>
-          <div className="stat-label">SF Trip Eligible</div>
+          <div className="stat-label">SF Trip Heroes</div>
           <div className="stat-indicator">
             <div className="stat-indicator-bar" style={{ width: `${percentComplete}%` }}></div>
           </div>
-          <p className="text-xs text-right text-gray-500">{percentComplete}% of participants</p>
+          <p className="text-xs text-right text-gray-500">{percentComplete}% of adventurers</p>
         </div>
         
-        <div className="card stat-card">
+        <div className="card stat-card hover:scale-105 transition-transform">
           <div className="stat-icon stat-secondary">
             <Clock size={24} strokeWidth={2} />
           </div>
           <div className="stat-value">{averageHours.toFixed(1)}</div>
-          <div className="stat-label">Average Hours</div>
+          <div className="stat-label">Average Quest Time</div>
           <div className="stat-indicator">
             <div className="stat-indicator-bar" style={{ width: `${Math.min(averageHours, 100)}%` }}></div>
           </div>
-          <p className="text-xs text-right text-gray-500">{Math.round(averageHours)}% of goal</p>
+          <p className="text-xs text-right text-gray-500">{Math.round(averageHours)}% to SF goal</p>
         </div>
         
-        <div className="card stat-card">
+        <div className="card stat-card hover:scale-105 transition-transform">
           <div className="stat-icon stat-warning">
             <TrendingUp size={24} strokeWidth={2} />
           </div>
           <div className="stat-value">{Math.round(totalHoursAll)}</div>
-          <div className="stat-label">Total Hours Logged</div>
+          <div className="stat-label">Total Adventure Hours</div>
           <div className="flex items-center gap-1 text-success text-sm" style={{marginTop: '0.5rem'}}>
             {/* <ArrowUpRight size={16} /> */}
             {/* <span>+2.4% from last week</span> */}
@@ -228,7 +239,7 @@ const Dashboard = ({ neighbors, setActiveTab }) => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="card">
           <div className="card-header flex justify-between items-center">
-            <h3 className="text-lg font-bold">Participants Progress</h3>
+            <h3 className="text-lg font-bold">Adventure Progress</h3>
             <div className="chart-legend">
               <div className="chart-legend-item">
                 <div className="chart-legend-color" style={{backgroundColor: '#3a0ca3'}}></div>
@@ -265,10 +276,10 @@ const Dashboard = ({ neighbors, setActiveTab }) => {
         
         <div className="card">
           <div className="card-header flex justify-between items-center">
-            <h3 className="text-lg font-bold">Top Participants</h3>
+            <h3 className="text-lg font-bold">Adventure Leaderboard</h3>
             <div className="badge badge-success flex items-center gap-1">
               <Star size={14} />
-              <span>Leaderboard</span>
+              <span>Top Heroes</span>
             </div>
           </div>
           <div className="card-body">
@@ -278,11 +289,11 @@ const Dashboard = ({ neighbors, setActiveTab }) => {
           </div>
           <div className="card-footer flex justify-end">
             <button 
-              className="button button-outline text-sm flex items-center gap-1"
-              onClick={() => setActiveTab('participants')}
+              className="button button-outline text-sm flex items-center gap-1 hover:scale-105 transition-transform"
+              onClick={handleViewParticipants}
             >
               <Users size={14} />
-              <span>View All Participants</span>
+              <span>View All Adventurers</span>
             </button>
           </div>
         </div>
@@ -291,13 +302,13 @@ const Dashboard = ({ neighbors, setActiveTab }) => {
       {/* Summary Section */}
       <div className="card">
         <div className="card-header flex justify-between items-center">
-          <h3 className="text-lg font-bold">Progress Summary</h3>
-          <div className="badge badge-primary">SF Trip Challenge</div>
+          <h3 className="text-lg font-bold">Adventure Summary</h3>
+          <div className="badge badge-primary">SF Quest Challenge</div>
         </div>
         
         <div className="card-body grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="space-y-2">
-            <p className="text-sm text-gray-500">Eligible Participants</p>
+            <p className="text-sm text-gray-500">Heroes Ready for SF</p>
             <div className="flex items-center justify-between">
               <span className="text-lg font-bold">{eligibleParticipants}</span>
               <span className="text-sm text-success">+{Math.round(percentComplete)}%</span>
@@ -308,7 +319,7 @@ const Dashboard = ({ neighbors, setActiveTab }) => {
           </div>
           
           <div className="space-y-2">
-            <p className="text-sm text-gray-500">Average Completion</p>
+            <p className="text-sm text-gray-500">Average Quest Progress</p>
             <div className="flex items-center justify-between">
               <span className="text-lg font-bold">{averageHours.toFixed(1)} hrs</span>
               <span className="text-sm text-primary">{Math.round(averageHours)}%</span>
@@ -319,7 +330,7 @@ const Dashboard = ({ neighbors, setActiveTab }) => {
           </div>
           
           <div className="space-y-2">
-            <p className="text-sm text-gray-500">Total Hours Tracked</p>
+            <p className="text-sm text-gray-500">Total Adventure Time</p>
             <div className="flex items-center justify-between">
               <span className="text-lg font-bold">{Math.round(totalHoursAll)} hrs</span>
               <span className="text-sm text-accent">~{Math.round(totalHoursAll / 100)} SF trips</span>

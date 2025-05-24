@@ -1,11 +1,16 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { FaGithub, FaSlack } from 'react-icons/fa';
 import { Plane, Timer, Clock, ExternalLink, Award, Map, CheckCircle2, Clock8 } from 'lucide-react';
 import ProgressBar from './ProgressBar';
 
 const UserCard = ({ user }) => {
+  const router = useRouter();
   const {
+    id,
+    username,
     pfp,
     fullName,
     githubUsername,
@@ -20,8 +25,19 @@ const UserCard = ({ user }) => {
   const isEligible = totalCheckedTime >= 100;
   const percentComplete = Math.min(Math.round((totalCheckedTime / 100) * 100), 100);
   
+  // Create user URL using ID or username
+  const userUrl = `/user/${id || username || encodeURIComponent(fullName)}`;
+  
+  const handleCardClick = (e) => {
+    // Don't navigate if clicking on external links
+    if (e.target.closest('a[href^="http"]')) {
+      return;
+    }
+    router.push(userUrl);
+  };
+  
   return (
-    <div className="card user-card">
+    <div className="card user-card cursor-pointer transition-all duration-200 hover:scale-105" onClick={handleCardClick}>
       <div className="user-card-header">
         <div className="user-avatar">
           <Image
@@ -38,7 +54,7 @@ const UserCard = ({ user }) => {
         </div>
         
         <div className="user-info">
-          <h3 className="user-name">{fullName || 'Anonymous'}</h3>
+          <h3 className="user-name">{fullName || username || 'Anonymous'}</h3>
           
           <div className="user-tags">
             {githubUsername && (
@@ -47,6 +63,7 @@ const UserCard = ({ user }) => {
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="user-tag"
+                onClick={(e) => e.stopPropagation()}
               >
                 <FaGithub />
                 <span className="truncate">{githubUsername}</span>
@@ -132,10 +149,10 @@ const UserCard = ({ user }) => {
         </div>
         
         <div className="user-card-footer">
-          <a href="#" className="user-details-link">
-            <span>View Details</span>
+          <div className="user-details-link">
+            <span>View Adventure Details</span>
             <ExternalLink size={12} />
-          </a>
+          </div>
         </div>
       </div>
     </div>

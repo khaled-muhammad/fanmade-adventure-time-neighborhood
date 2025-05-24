@@ -126,8 +126,8 @@ img {
 
 /* Selection */
 ::selection {
-  background: var(--gradient-finn);
-  color: var(--color-gray-900);
+  /* background: var(--gradient-finn); */
+  /* color: var(--color-gray-900); */
 }
 
 /* Layout */
@@ -357,7 +357,7 @@ img {
 
 .badge-primary {
   background: var(--gradient-adventure);
-  color: var(--color-gray-900);
+  color: white;
   border-color: var(--color-primary);
 }
 
@@ -1809,4 +1809,182 @@ img {
 
 .status-dot.warning {
   background: var(--color-warning);
+}
+
+/* Utility Classes - Added for Professional Homepage Styling */
+/* Background Colors */
+.bg-white { background-color: #ffffff; }
+.bg-gray-50 { background-color: var(--color-gray-50); }
+.bg-gray-100 { background-color: var(--color-gray-100); }
+.bg-gray-200 { background-color: var(--color-gray-200); }
+.bg-gray-900 { background-color: var(--color-gray-900); }
+.bg-blue-50 { background-color: rgba(0, 212, 255, 0.05); }
+.bg-green-50 { background-color: rgba(50, 205, 50, 0.05); }
+.bg-purple-50 { background-color: rgba(123, 104, 238, 0.05); }
+.bg-blue-100 { background-color: rgba(0, 212, 255, 0.1); }
+.bg-green-100 { background-color: rgba(50, 205, 50, 0.1); }
+.bg-purple-100 { background-color: rgba(123, 104, 238, 0.1); }
+
+/* Text Colors */
+.text-gray-900 { color: var(--color-gray-900); }
+.text-blue-600 { color: var(--color-primary-dark); }
+.text-green-600 { color: var(--color-success); }
+.text-purple-600 { color: var(--color-secondary); }
+
+/* Border Colors */
+.border-gray-200 { border-color: var(--color-gray-200); }
+.border-gray-300 { border-color: var(--color-gray-300); }
+
+/* Rounded Utilities */
+.rounded-lg { border-radius: var(--radius-lg); }
+.rounded-xl { border-radius: var(--radius-xl); }
+.rounded-2xl { border-radius: var(--radius-2xl); }
+
+/* Shadow Utilities */
+.shadow-lg { box-shadow: var(--shadow-lg); }
+.hover\:shadow-lg:hover { box-shadow: var(--shadow-lg); }
+
+/* Hover Background Utilities */
+.hover\:bg-gray-50:hover { background-color: var(--color-gray-50); }
+.hover\:bg-gray-800:hover { background-color: #1f2937; }
+
+/* User Detail Page Specific Styles */
+.animate-fadeIn {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+.min-h-screen {
+  min-height: 100vh;
+}
+
+.object-cover {
+  object-fit: cover;
+}
+
+/* Enhanced Progress Bar */
+.progress-bar-enhanced {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent), var(--color-success));
+  border-radius: var(--radius-full);
+  transition: width 1s ease-out;
+}
+
+/* Enhanced Border Styles */
+.border-6 {
+  border-width: 6px;
+}
+
+.border-transparent {
+  border-color: transparent;
+}
+
+/* Spacing */
+.p-8 {
+  padding: 2rem;
+}
+
+.py-12 {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.mb-10 {
+  margin-bottom: 2.5rem;
+}
+
+.mb-8 {
+  margin-bottom: 2rem;
+}
+
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+
+.gap-8 {
+  gap: 2rem;
+}
+
+/* Enhanced Drop Shadow */
+.drop-shadow-lg {
+  filter: drop-shadow(0 10px 8px rgba(0, 0, 0, 0.04)) drop-shadow(0 4px 3px rgba(0, 0, 0, 0.1));
+}
+
+/* Glass Effect */
+.bg-white\/50 {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Animation Duration */
+.duration-300 {
+  transition-duration: 300ms;
+}
+
+.duration-1000 {
+  transition-duration: 1000ms;
+}
+
+.ease-out {
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+}
+
+/* Enhanced Hover Transforms */
+.hover\:scale-105:hover {
+  transform: scale(1.05);
+}
+
+.transition-transform {
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+/* Enhanced Grid Layouts */
+.lg\:grid-cols-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+@media (min-width: 1024px) {
+  .lg\:text-5xl {
+    font-size: 3rem;
+    line-height: 1;
+  }
+  
+  .lg\:flex-row {
+    flex-direction: row;
+  }
+  
+  .lg\:text-left {
+    text-align: left;
+  }
+  
+  .lg\:justify-start {
+    justify-content: flex-start;
+  }
 }
