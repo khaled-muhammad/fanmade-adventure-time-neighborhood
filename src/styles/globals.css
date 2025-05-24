@@ -1536,7 +1536,7 @@ img {
 /* Dropdown Container */
 .dropdown-container {
   position: relative !important;
-  z-index: 100 !important;
+  /* z-index: 100 !important; */
   margin-left: 10px;
 }
 
@@ -1589,7 +1589,6 @@ img {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.4);
     z-index: -1;
     backdrop-filter: blur(2px);
   }
@@ -2053,7 +2052,7 @@ img {
 /* Ensure dropdowns work well on all devices */
 .dropdown-container {
   position: relative !important;
-  z-index: 100 !important;
+  /* z-index: 100 !important; */
   margin-left: 10px;
 }
 
