@@ -1562,6 +1562,39 @@ img {
   max-height: none !important;
 }
 
+/* Mobile-specific dropdown adjustments */
+@media (max-width: 640px) {
+  .dropdown-enhanced {
+    position: fixed !important;
+    top: auto !important;
+    bottom: 1rem !important;
+    left: 1rem !important;
+    right: 1rem !important;
+    width: calc(100vw - 2rem) !important;
+    min-width: unset !important;
+    max-width: none !important;
+    z-index: 99999 !important;
+    transform: translateY(0) !important;
+  }
+  
+  .dropdown-enhanced::before {
+    display: none; /* Hide the arrow on mobile */
+  }
+  
+  /* Add backdrop for mobile */
+  .dropdown-enhanced::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: -1;
+    backdrop-filter: blur(2px);
+  }
+}
+
 .dropdown-enhanced::before {
   content: '';
   position: absolute;
@@ -1986,5 +2019,60 @@ img {
   
   .lg\:justify-start {
     justify-content: flex-start;
+  }
+  
+  .lg\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* Mobile responsive grid - Show 2 columns on mobile for stats cards */
+@media (max-width: 767px) {
+  .sm\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Enhanced responsiveness for various screen sizes */
+@media (min-width: 640px) {
+  .sm\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 768px) {
+  .md\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  
+  .md\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* Ensure dropdowns work well on all devices */
+.dropdown-container {
+  position: relative !important;
+  z-index: 100 !important;
+  margin-left: 10px;
+}
+
+/* Better mobile spacing for filter controls */
+@media (max-width: 640px) {
+  .filter-card-enhanced {
+    padding: 1rem;
+  }
+  
+  .control-button-enhanced {
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+  }
+  
+  .dropdown-header-enhanced {
+    padding: 1rem;
+  }
+  
+  .dropdown-header-enhanced h3 {
+    font-size: 1rem;
   }
 }

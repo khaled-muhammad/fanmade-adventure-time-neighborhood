@@ -281,58 +281,58 @@ export default function UserDetailPage() {
         </div>
 
         {/* Key Stats Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-10">
           <div className="card hover:scale-105 transition-transform duration-300">
-            <div className="card-body text-center p-8">
+            <div className="card-body text-center p-4 md:p-8">
               <CheckCircle2 size={32} className="text-black" />
-              <h3 className="font-bold text-xl mb-3 text-gray-900">Total Checked Time</h3>
-              <p className="text-4xl font-bold text-primary mb-2">
+              <h3 className="font-bold text-lg md:text-xl mb-2 md:mb-3 text-gray-900">Total Checked Time</h3>
+              <p className="text-2xl md:text-4xl font-bold text-primary mb-1 md:mb-2">
                 {user.totalCheckedTime?.toFixed(1) || '0.0'}
-                <span className="text-lg text-gray-600 ml-2">hrs</span>
+                <span className="text-sm md:text-lg text-gray-600 ml-1 md:ml-2">hrs</span>
               </p>
-              <p className="text-sm text-gray-600">
+              <p className="text-xs md:text-sm text-gray-600">
                 Primary metric for SF eligibility
               </p>
             </div>
           </div>
 
           <div className="card hover:scale-105 transition-transform duration-300">
-            <div className="card-body text-center p-8">
+            <div className="card-body text-center p-4 md:p-8">
               <Timer size={32} className="text-black" />
-              <h3 className="font-bold text-xl mb-3 text-gray-900">Hackatime</h3>
-              <p className="text-4xl font-bold text-accent mb-2">
+              <h3 className="font-bold text-lg md:text-xl mb-2 md:mb-3 text-gray-900">Hackatime</h3>
+              <p className="text-2xl md:text-4xl font-bold text-accent mb-1 md:mb-2">
                 {user.totalTimeHackatimeHours?.toFixed(1) || '0.0'}
-                <span className="text-lg text-gray-600 ml-2">hrs</span>
+                <span className="text-sm md:text-lg text-gray-600 ml-1 md:ml-2">hrs</span>
               </p>
-              <p className="text-sm text-gray-600">
+              <p className="text-xs md:text-sm text-gray-600">
                 Automatic coding time tracking
               </p>
             </div>
           </div>
 
           <div className="card hover:scale-105 transition-transform duration-300">
-            <div className="card-body text-center p-8">
+            <div className="card-body text-center p-4 md:p-8">
               <Clock size={32} className="text-black" />
-              <h3 className="font-bold text-xl mb-3 text-gray-900">Stopwatch</h3>
-              <p className="text-4xl font-bold text-success mb-2">
+              <h3 className="font-bold text-lg md:text-xl mb-2 md:mb-3 text-gray-900">Stopwatch</h3>
+              <p className="text-2xl md:text-4xl font-bold text-success mb-1 md:mb-2">
                 {user.totalTimeStopwatchHours?.toFixed(1) || '0.0'}
-                <span className="text-lg text-gray-600 ml-2">hrs</span>
+                <span className="text-sm md:text-lg text-gray-600 ml-1 md:ml-2">hrs</span>
               </p>
-              <p className="text-sm text-gray-600">
+              <p className="text-xs md:text-sm text-gray-600">
                 Manual time tracking
               </p>
             </div>
           </div>
 
           <div className="card hover:scale-105 transition-transform duration-300">
-            <div className="card-body text-center p-8">
+            <div className="card-body text-center p-4 md:p-8">
               <Clock8 size={32} className="text-black" />
-              <h3 className="font-bold text-xl mb-3 text-gray-900">Combined</h3>
-              <p className="text-4xl font-bold text-secondary mb-2">
+              <h3 className="font-bold text-lg md:text-xl mb-2 md:mb-3 text-gray-900">Combined</h3>
+              <p className="text-2xl md:text-4xl font-bold text-secondary mb-1 md:mb-2">
                 {user.totalTimeCombinedHours?.toFixed(1) || '0.0'}
-                <span className="text-lg text-gray-600 ml-2">hrs</span>
+                <span className="text-sm md:text-lg text-gray-600 ml-1 md:ml-2">hrs</span>
               </p>
-              <p className="text-sm text-gray-600">
+              <p className="text-xs md:text-sm text-gray-600">
                 Total coding time
               </p>
             </div>
