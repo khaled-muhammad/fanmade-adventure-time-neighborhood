@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { FaGithub, FaSlack } from 'react-icons/fa';
@@ -40,11 +39,10 @@ const UserCard = ({ user }) => {
     <div className="card user-card cursor-pointer transition-all duration-200 hover:scale-105" onClick={handleCardClick}>
       <div className="user-card-header">
         <div className="user-avatar">
-          <Image
+          <img
             src={pfp || '/default-avatar.png'}
             alt={fullName || 'Participant'}
-            fill
-            className="avatar"
+            className="avatar w-16 h-16"
           />
           {isEligible && (
             <div className="user-avatar-badge">

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { LayoutGrid, Users, RefreshCw, Menu, X, Clock, MapPin, Award, BellRing, Heart, Sparkles, Home } from 'lucide-react';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 
@@ -51,7 +50,7 @@ const Layout = ({ children, activeTab, onRefresh, onNavigate }) => {
         <div className="container flex items-center justify-between">
           <Link href="/" className="navbar-brand">
             <div className="navbar-brand-icon">
-              <Image src="https://neighborhood.hackclub.dev/neighborhoodLogo.png" alt="Neighborhood" width={128} height={128} />
+              <img src="https://neighborhood.hackclub.dev/neighborhoodLogo.png" alt="Neighborhood" width={128} height={128} />
             </div>
           </Link>
           

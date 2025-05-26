@@ -1,8 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  // Image optimization disabled
   images: {
-    domains: ['v5.airtableusercontent.com', 'neighborhood.hackclub.dev'],
+    unoptimized: true
   },
   webpack: (config) => {
     return config;
